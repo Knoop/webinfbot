@@ -3,3 +3,6 @@ venv/
 
 # Ignore example database
 webinfbot.db
+
+# Ignore configuration file containing private keys
+webinfbot.ini

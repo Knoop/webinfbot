@@ -7,9 +7,9 @@ class StreamListener(tweepy.StreamListener):
         print(status.text)
 
 # Read config file for account info and app keys
-def get_config(file_path):
+def get_config(config_file):
     parser = RawConfigParser()
-    parser.read(file_path)
+    parser.read(config_file)
 
     return parser._sections
 
@@ -19,7 +19,7 @@ def get_api(config):
     auth.set_access_token(config['keys']['access_token'], config['keys']['access_secret'])
 
     return tweepy.API(auth)
-
+    
 # Create a simple stream listener
 def get_stream(api):
     streamListener = StreamListener()
@@ -27,9 +27,14 @@ def get_stream(api):
     return tweepy.Stream(auth = api.auth, listener = streamListener)
 
 if __name__ == '__main__':
-    config = get_config('webinfbot.ini')
-    api    = get_api(config)
-    stream = get_stream(api)
+    config_file = './webinfbot.ini'
 
-    # Only receive statuses containing 'python'
-    stream.filter(track = ['python'])
+    try:
+        config = get_config(config_file)
+        api    = get_api(config)
+        stream = get_stream(api)
+
+        # Only receive statuses containing 'python'
+        stream.filter(track = ['python'])
+    except KeyError:
+        print('Error: missing key. Are you sure you have the proper config file in the correct location? (' + config_file + ')')

@@ -1,8 +1,5 @@
-# Ignore python virtual environment
-venv/
+# Exclude file containing private keys
+twitter4j.properties
 
-# Ignore example database
-webinfbot.db
-
-# Ignore configuration file containing private keys
-webinfbot.ini
+# Maven and project management related files
+/target

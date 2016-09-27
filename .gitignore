@@ -3,3 +3,10 @@ twitter4j.properties
 
 # Maven and project management related files
 /target
+
+# Binaries which can be compiled from source
+*.jar
+*.war
+*.ear
+*.class
+
